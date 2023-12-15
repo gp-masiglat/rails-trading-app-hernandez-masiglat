@@ -5,8 +5,8 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :email_address
       t.string :password_digest
       t.string :full_name
-      t.string :role, default: 'trader'
-      t.string :status, default: 'pending'
+      t.string :role
+      t.string :status
 
       t.timestamps
     end

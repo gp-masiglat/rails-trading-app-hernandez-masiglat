@@ -19,8 +19,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_15_044428) do
     t.string "email_address"
     t.string "password_digest"
     t.string "full_name"
-    t.string "role", default: "trader"
-    t.string "status", default: "pending"
+    t.string "role"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
