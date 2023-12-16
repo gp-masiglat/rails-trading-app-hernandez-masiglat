@@ -36,7 +36,7 @@
     <%= form.label :full_name, style: "display: block" %>
     <%= form.text_field :full_name %>
   </div>
-<% if current_user.role == 'Admin' %>
+<% if current_user && current_user.role == 'Admin' %>
   <div>
     <%= form.label :role, style: "display: block" %>
     <%= form.select :role, options_for_select(['Admin', 'Trader']), prompt: 'Select a role' %>
