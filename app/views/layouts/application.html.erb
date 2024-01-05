@@ -14,10 +14,13 @@
   <body>
   
 <% if current_user %>
-  <%= button_to "Logout", logout_path, method: :delete %>
+  <div class="d-flex justify-content-end">
+    <%= button_to "Users", users_path, method: :delete, :class => 'btn btn-link btn-block m-2' %>
+    <%= button_to "Logout", logout_path, method: :delete, :class => 'btn btn-link btn-block m-2' %>
+  </div>
 <% else %>
   <div class="d-flex justify-content-end">
-    <%= button_to "Login", login_path, method: :get , :class => 'btn btn-link btn-block m-4' %>
+    <%= button_to "Login", login_path, method: :get , :class => 'btn btn-link btn-block m-2' %>
   </div>
 <% end %>
     <%= yield %>
