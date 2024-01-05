@@ -1,9 +1,13 @@
-<h1>New user</h1>
+<div class="row text-center d-flex justify-content-center">
+  <h1>Register</h1>
 
-<%= render "form", user: @user %>
+  <%= render "form", user: @user %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Back to users", users_path %>
+  <div>
+  <% if current_user && current_user.role == 'Admin' %>
+    <%= link_to "Back to users", users_path, :class => 'btn btn-primary btn-block m-2' %>
+    <% end %>
+  </div>
 </div>

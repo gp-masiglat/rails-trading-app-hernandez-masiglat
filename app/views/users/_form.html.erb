@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
@@ -11,45 +13,48 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
-  </div>
-
-  <div>
-    <%= form.label :email_address, style: "display: block" %>
-    <%= form.text_field :email_address %>
-  </div>
-
-  <% if action_name == 'new' %>
+  <div class="row text-center d-flex justify-content-center">
     <div>
-      <%= form.label :password, style: "display: block" %>
-      <%= form.password_field :password %>
+      <%= form.label :username, style: "display: block" %>
+      <%= form.text_field :username %>
     </div>
+
     <div>
-      <%= form.label :password_confirmation, style: "display: block" %>
-      <%= form.password_field :password_confirmation %>
+      <%= form.label :email_address, style: "display: block" %>
+      <%= form.text_field :email_address %>
+    </div>
+
+    <% if action_name == 'new' %>
+      <div>
+        <%= form.label :password, style: "display: block" %>
+        <%= form.password_field :password %>
+      </div>
+      <div>
+        <%= form.label :password_confirmation, style: "display: block" %>
+        <%= form.password_field :password_confirmation %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :full_name, style: "display: block" %>
+      <%= form.text_field :full_name %>
+    </div>
+  <% if current_user && current_user.role == 'Admin' %>
+    <div>
+      <%= form.label :role, style: "display: block" %>
+      <%= form.select :role, options_for_select(['Admin', 'Trader']), prompt: 'Select a role' %>
+
+
+    </div>
+
+    <div>
+      <%= form.label :status, style: "display: block" %>
+      <%= form.select :status, options_for_select(['Pending', 'Approved']), prompt: 'Select a status' %>
+    </div>
+  <% end %>
+    <div>
+      <%= form.submit 'Register', :class => 'btn btn-primary btn-block m-2' %>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :full_name, style: "display: block" %>
-    <%= form.text_field :full_name %>
   </div>
-<% if current_user && current_user.role == 'Admin' %>
-  <div>
-    <%= form.label :role, style: "display: block" %>
-    <%= form.select :role, options_for_select(['Admin', 'Trader']), prompt: 'Select a role' %>
-
-
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, options_for_select(['Pending', 'Approved']), prompt: 'Select a status' %>
-  </div>
-<% end %>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
