@@ -1,15 +1,26 @@
 
-<p id="notice"><%= notice %></p>
+<div class="row text-center d-flex justify-content-center">
+  <div class="col-lg-5 text-center">
+    <p id="notice"><%= notice %></p>
 
-<%= form_with(url: sessions_path, method: :post) do |form| %>
-  <%= form.label :username %>
-  <%= form.text_field :username %>
+    <%= form_with(url: sessions_path, method: :post) do |form| %>
+      <div class="form-outline mb-4">
+      <%= form.label :username , :class => 'form-label',:for=>'username' %>
+      <%= form.text_field :username ,  :class => 'form-control',:id=>'username' %>
+      
+      </div>
 
-  <%= form.label :password %>
-  <%= form.password_field :password %>
-
-  <%= form.submit 'Login' %>
-<% end %>
-<%=link_to "Register New Account", signup_path, class:"text-blue-700 underline my-8" %>
+      <div class="form-outline mb-4">
+      <%= form.label :password, :class => 'form-label' %>
+      <%= form.password_field :password,  :class => 'form-control' %>
+      </div>
+      
+      <%= form.submit 'Login', :class => 'btn btn-primary btn-block mb-4' %>
+    <% end %>
+    <span>No account yet? <%=link_to "Register", signup_path, class:"text-blue-700 underline my-8" %>
+  </div>
+  
 
 </div>
+
+
