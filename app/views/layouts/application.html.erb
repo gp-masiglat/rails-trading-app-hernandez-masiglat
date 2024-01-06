@@ -15,6 +15,9 @@
   
 <% if current_user %>
   <div class="d-flex justify-content-end">
+    <%= button_to "Stocks", stocks_path, method: :get, :class => 'btn btn-link btn-block m-2' %>
+    <%= button_to "Transactions", transactions_path, method: :get, :class => 'btn btn-link btn-block m-2' %>
+    <%= button_to "Cash Account", cash_account_path, method: :get, :class => 'btn btn-link btn-block m-2' %>
     <%= button_to "Home", home_path, method: :get, :class => 'btn btn-link btn-block m-2' %>
     <%= button_to "Users", users_path, method: :get, :class => 'btn btn-link btn-block m-2' %>
     <%= button_to "Logout", logout_path, method: :delete, :class => 'btn btn-link btn-block m-2' %>

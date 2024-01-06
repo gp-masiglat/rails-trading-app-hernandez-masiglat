@@ -1,0 +1,27 @@
+<div class='row d-flex justify-content-center'>
+  
+  <div class="col-lg-5">
+  <h1>Deposit form</h1>
+    <form>
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" class="form-control" id="amount" aria-describedby="" placeholder="Enter Amount">
+        
+      </div>
+      <div class="form-group">
+        <label for="bank_name">Bank Name</label>
+        <input type="email" class="form-control" id="bank_name" aria-describedby="" placeholder="Enter Bank Name">
+       
+      </div>
+      <div class="form-group">
+        <label for="account_number">Account Number</label>
+        <input type="text" class="form-control" id="account_number" placeholder="Account Number">
+      </div>
+
+      <button type="submit" class="btn btn-primary m-1">Submit</button>
+    </form>
+    <%= button_to "Back", cash_account_path, method: :get, :class => 'btn btn-link btn-block m-2' %>
+  </div>
+ 
+
+</div>
