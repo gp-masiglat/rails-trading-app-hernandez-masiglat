@@ -1,0 +1,36 @@
+
+
+<div class='row d-flex justify-content-center'>
+  
+  <div class="col-lg-5">
+  
+    <%= form_with(model: cash_account, url: cash_account_create_path) do |form| %>
+        
+        <%# select_tag :trans_type, options_for_select([["Deposit","Deposit"],["Widthdraw","Widthdraw"]]), :class => 'form-control', :required => true,
+        include_blank: 'Select Transaction' %>
+        <%= form.select(:trans_type, [['Select Transaction',''],['Deposit','Deposit'],['Widthdraw','Widthdraw']],{:class => 'form-control',:required => true, :id => 'trans_type'}) %>
+
+        <%= form.hidden_field :status, :value => 'ok' %>    
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <%= form.number_field :amount, :class => 'form-control', :placeholder=>'Enter Amount' %>
+
+        </div>
+        <div class="form-group">
+          <label for="bank_name">Bank Name</label>
+          <%= form.text_field :bank_name, :class => 'form-control', :placeholder=>'Enter Bank Name' %>
+        </div>
+        <div class="form-group">
+          <label for="account_number">Account Number</label>
+          <%= form.text_field :account_number, :class => 'form-control', :placeholder=>'Enter Account Number' %>
+        </div>
+
+        <button type="submit" class="btn btn-primary m-1">Submit</button>
+    
+     
+    <% end %>
+  </div>
+ 
+
+</div>
+

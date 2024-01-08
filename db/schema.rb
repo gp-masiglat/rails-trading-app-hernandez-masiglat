@@ -10,9 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_04_121739) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_06_050445) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cash_accounts", force: :cascade do |t|
+    t.string "bank_name"
+    t.string "account_number"
+    t.decimal "amount"
+    t.string "trans_type"
+    t.string "status"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "stock_name"
+    t.decimal "price"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "transaction_type"
+    t.string "stock_name"
+    t.integer "number_of_stock"
+    t.decimal "total_price"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
