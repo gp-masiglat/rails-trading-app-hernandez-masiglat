@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   post '/sessions', to: 'sessions#create'
   get '/home', to: 'home#index'
   get '/cash_account', to: 'cash_accounts#index'
-  get '/cash_account/deposit', to: 'cash_accounts#deposit'
-  get '/cash_account/widthdraw', to: 'cash_accounts#widthdraw'
+  get '/cash_account/new', to: 'cash_accounts#new'
+  post '/cash_account/create', to: 'cash_accounts#create'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

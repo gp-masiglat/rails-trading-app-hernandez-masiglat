@@ -4,7 +4,7 @@ class CreateCashAccounts < ActiveRecord::Migration[7.1]
       t.string :bank_name
       t.string :account_number
       t.decimal :amount
-      t.string :type
+      t.string :trans_type
       t.string :status
       t.integer :user_id
 

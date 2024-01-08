@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_050445) do
     t.string "bank_name"
     t.string "account_number"
     t.decimal "amount"
-    t.string "type"
+    t.string "trans_type"
     t.string "status"
     t.integer "user_id"
     t.datetime "created_at", null: false
