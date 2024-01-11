@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_user, only: %i[ show edit update destroy ]
+  # before_action :check_privilege, only
 
   # GET /users or /users.json
   def index
+    redirect_to root_path if current_user.role != 'Admin'
     @users = User.all
   end
 
