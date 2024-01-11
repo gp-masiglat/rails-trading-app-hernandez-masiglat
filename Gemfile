@@ -71,3 +71,5 @@ group :development, :test do
 end
 
 gem 'pg'
+
+gem 'iex-ruby-client'
