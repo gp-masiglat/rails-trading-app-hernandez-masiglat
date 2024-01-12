@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       if user.role == 'Admin'
-          redirect_to root_path, notice: 'Login successful!'
+          redirect_to users_path, notice: 'Login successful!'
       else
         # temporary path to be edited later
-         redirect_to home_path(user.id)
+         redirect_to root_path, notice: 'Login successful!'
       end
     else
       # flash.now[:notice] = 'Invalid username or password'

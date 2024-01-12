@@ -18,6 +18,7 @@
       <%= form.submit 'Login', :class => 'btn btn-primary btn-block mb-4' %>
     <% end %>
     <span>No account yet? <%=link_to "Register", signup_path, class:"text-blue-700 underline my-8" %>
+    <%= button_to "Home", root_path, method: :get, :class => 'btn btn-link btn-block m-2' %>
   </div>
   
 

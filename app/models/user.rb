@@ -2,6 +2,7 @@ class User < ApplicationRecord
     validates :username, presence: true, uniqueness: { scope: :email_address }
     has_secure_password
     has_many :cash_accounts
+    has_many :stocks
 
 
     before_validation :set_status_value
