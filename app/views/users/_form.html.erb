@@ -53,7 +53,7 @@
     </div>
   <% end %>
     <div>
-      <%= form.submit 'Register', :class => 'btn btn-primary btn-block m-2' %>
+      <%= form.submit action_name == 'new'?'Register':'Save Changes', :class => 'btn btn-primary btn-block m-2' %>
     </div>
   <% end %>
 

@@ -1,33 +1,29 @@
 class CashAccountsController < ApplicationController
     # before_action :authenticate_user!, except: [:new, :create]
-    # before_action :set_user, only: %i[ show edit update destroy ]
+    before_action :set_user
 
   def index
-    
-    @user = User.find(session[:user_id])
-    @cash_accounts = CashAccount.where(user_id: @user.id)
-    sum_depo = CashAccount.where(user_id: @user.id, trans_type: 'Deposit').sum(:amount)
-    sum_widthdraw = CashAccount.where(user_id: @user.id,trans_type:'Widthdraw').sum(:amount)
-    @ca_balance = sum_depo - sum_widthdraw
-
   end
 
   def new
-    @cash_account = CashAccount.new
+    @cash_account = @user.cash_accounts.new
   end
 
   def create
-    @cash_account = CashAccount.new(ca_params)
-    @cash_account.user_id =session[:user_id]
+    @cash_account = @user.cash_accounts.new(ca_params)
+      # Update user balance
+      new_balance = ca_params[:trans_type] == 'Deposit'? @user.balance + BigDecimal(ca_params[:amount]) : @user.balance - BigDecimal(ca_params[:amount])
 
     respond_to do |format|
-      if @cash_account.save
-
-        format.html { redirect_to cash_account_path, notice: "Transaction is successfull!" }
-        format.json { render :show, status: :created, location: @cash_account }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cash_account.errors, status: :unprocessable_entity }
+      if @user.update({'balance' => new_balance})
+        if @cash_account.save
+          
+          format.html { redirect_to cash_account_path, notice: "Transaction is successfull!" }
+          format.json { render :show, status: :created, location: @cash_account }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @cash_account.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -35,6 +31,7 @@ class CashAccountsController < ApplicationController
   private
   def set_user
     @user = User.find(session[:user_id])
+    @cash_accounts = @user.cash_accounts
   end
 
   def ca_params

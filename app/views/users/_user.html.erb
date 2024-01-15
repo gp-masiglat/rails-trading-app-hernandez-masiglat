@@ -5,7 +5,9 @@
       <td><%= user.full_name %></td>
       <td> <%= user.role %></td>
       <td><%= user.status %></td>
+      <% if action_name != 'show' %>
       <td><%= link_to "Show this user", user %></td>
+      <% end %>
     </tr>
 
   
