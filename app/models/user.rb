@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_secure_password
     has_many :cash_accounts
     has_many :stocks
+    has_many :transactions
 
 
     before_validation :set_status_value
