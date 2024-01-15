@@ -3,8 +3,11 @@
 <%= render @user %>
 
 <div>
+<% if current_user.role == 'Admin' %>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
-
+<% else %>
+  <%= link_to "Edit Profile", edit_user_path(@user) %>
+<% end %>
   <%= button_to "Delete Account", @user, method: :delete %>
 </div>

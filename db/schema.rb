@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_050445) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "balance"
+    t.decimal "balance", default: "0.0"
   end
 
 end
