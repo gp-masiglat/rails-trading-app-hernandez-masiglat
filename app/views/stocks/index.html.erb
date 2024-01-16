@@ -17,7 +17,8 @@
       <td><%= company[:name] %></td>
       <td><%= company[:price] %></td>
       <td><%= button_to "View", show_stocks_path_url(company[:symbol]), method: :get, :class => 'btn btn-link' %>|
-      <%= link_to 'Buy', transaction_new_path_url(company[:symbol],trans_type:'buy'), method: :get, :class => 'btn btn-link' %>|Sell</td>
+      <%= link_to 'Buy', transaction_new_path_url(company[:symbol],trans_type:'Buy'), method: :get, :class => 'btn btn-link' %>|
+      <%# link_to 'Sell', transaction_new_path_url(company[:symbol],trans_type:'Sell'), method: :get, :class => 'btn btn-link' %></td>
     </tr>
     <% end %>
     </tbody>
@@ -45,8 +46,7 @@
         <td><%= item[:quantity] %></td>
         <td><%= item[:quantity] * item[:price] %></td>
         <td><%= button_to "View", show_stocks_path_url(item[:symbol]), method: :get, :class => 'btn btn-link' %>|
-        Buy
-        |Sell</td>
+        <%= link_to 'Sell', transaction_new_path_url(item[:symbol],trans_type:'Sell',qty: item[:quantity] ), method: :get, :class => 'btn btn-link' %></td>
       </tr>
       <% end %>
       </tbody>

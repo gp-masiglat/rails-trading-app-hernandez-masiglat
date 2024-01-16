@@ -4,11 +4,42 @@
 
 <div id="transactions">
   <% @transactions.each do |transaction| %>
-    <%= render transaction %>
+    <%# render transaction %>
     <p>
-      <%= link_to "Show this transaction", transaction %>
+      <%# link_to "Show this transaction", transaction %>
     </p>
   <% end %>
 </div>
 
 <%# link_to "New transaction", new_transaction_path %>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User_id</th>
+      <th scope="col">Transaction type</th>
+      <th scope="col">Stock_symbol</th>
+      <th scope="col">Price</th>
+      <th scope="col">Number of stock/s</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+
+  <% @transactions.each do |t| %>
+
+  <tbody>
+    <tr>
+      <td><%= t.user_id %></td>
+      <td><%= t.transaction_type %></td>
+      <td><%= t.stock_name %></td>
+      <td><%= t.price %></td>
+      <td><%= t.number_of_stock %></td>
+      <td><%= t.total_price %></td>
+      <td><%= t.created_at %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
