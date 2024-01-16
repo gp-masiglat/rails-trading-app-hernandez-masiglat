@@ -1,9 +1,104 @@
 <h1>New transaction</h1>
 
-<%= render "form", transaction: @transaction %>
+<%# render "form", transaction: @transaction, stock: @stock %>
 
 <br>
 
 <div>
   <%= link_to "Back to transactions", transactions_path %>
 </div>
+<%
+  if params[:trans_type] == 'Buy'
+    url = "/transactions/buy"
+  else
+    url = "/transactions/sell"
+  end
+
+%>
+
+<%= form_with url: url, method: :post  do |form| %>
+  <h4 id="cash_h4">Wallet Balance :  <%= form.number_field :balance, value: @user[:balance] , id: "user_bal", :disabled=>true %></h4>
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.number_field :user_id , value: @user[:id] %>
+  </div>
+
+  <div>
+    <%= form.label :transaction_type, style: "display: block" %>
+    <%= form.hidden_field :transaction_type, value: params[:trans_type] , id: "trans_type" %>
+    <%= form.number_field :qty, value: params[:qty] , id: "qty" %>
+  </div>
+
+  <div>
+    <%= form.label :stock_name, style: "display: block" %>
+    <%= form.text_field :stock_name ,value: @company[:symbol]  %>
+    <%= form.hidden_field :symbol ,value: @company[:symbol]  %>
+  </div>
+
+  <div>
+    <label for="current_price"> Current price per stock </label> <br>
+  
+    <%= form.number_field :price, value:@company[:price] , id: "stock_price" %>
+  </div>
+
+  <div>
+    <%= form.label :number_of_stock, style: "display: block" %>
+    <%= form.number_field :number_of_stock, id: "stock_qty", :onkeyup => "qty_function(this.value)" , :required => true %>
+    <%# form.number_field :number_of_stock, id: "stock_qty", :required=>true %>
+    <%= form.hidden_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.label :total_price, style: "display: block" %>
+    <%= form.text_field :total_price , id: "total_price", :disabled => true %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status ,value: 'ok' %>
+  </div>
+
+  <div>
+    <%= form.submit :id=>"submit" %>
+  </div>
+  <% end %>
+
+  <script> 
+
+
+  var stock_qty = document.getElementById("stock_qty");
+  var total_price = document.getElementById("total_price");
+  var stock_price = document.getElementById("stock_price");
+  var trans_type = document.getElementById("trans_type");
+  
+  var submit = document.getElementById("submit");
+  var user_bal = document.getElementById("user_bal").value;
+  var qty = document.getElementById("qty").value;
+  var cash_h4 = document.getElementById("cash_h4");
+
+
+  if(trans_type.value == "Sell"){
+    cash_h4.style.display = 'none';
+  }
+  function qty_function(e){
+      var val = e.keyCode;
+
+      console.log(parseFloat(e)*parseFloat(stock_price.value));
+      total_price.value = parseFloat(e)*parseFloat(stock_price.value);
+      if(trans_type.value == "Sell"){
+        cash_h4.style.display = 'none';
+        if(total_price.value > parseFloat(user_bal) || parseFloat(e) > qty){
+          submit.disabled = true;
+        }else{
+          submit.disabled = false;
+        }
+
+      }
+        
+      
+
+    }
+
+
+  </script>
+

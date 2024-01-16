@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_050445) do
     t.integer "user_id"
     t.string "transaction_type"
     t.string "stock_name"
+    t.decimal "price"
     t.integer "number_of_stock"
     t.decimal "total_price"
     t.string "status"

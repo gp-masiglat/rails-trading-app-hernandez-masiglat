@@ -4,6 +4,7 @@ class CreateTransactions < ActiveRecord::Migration[7.1]
       t.integer :user_id
       t.string :transaction_type
       t.string :stock_name
+      t.decimal :price
       t.integer :number_of_stock
       t.decimal :total_price
       t.string :status
