@@ -6,7 +6,8 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.where(user_id: session[:user_id])
+    # @transactions = Transaction.all
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -15,10 +16,10 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new/[stocks symbol]
   def new
-    @user = User.find(session[:user_id])
+    
     @transaction = Transaction.new
     @stock = Stock.new
-    
+    @user = User.find(session[:user_id])
     @company = @companies.find {|hash| hash[:symbol]==params[:symbol]}
   end
 
@@ -30,16 +31,20 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def buy
     @stock = Stock.new(stock_params)
+    debugger
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
       
       if @transaction.save
+        
         @user.update(update_balance_params)
-
+        
         if @stockExist.present?
+          
           @stockExist.update(stock_params)
         else
+          
           @stock.save
         end
         
