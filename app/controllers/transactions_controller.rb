@@ -129,6 +129,7 @@ class TransactionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def transaction_params
       params[:total_price] = params[:price].to_f * params[:number_of_stock].to_i
+      params[:status] = 'ok'
       params.permit(:user_id, :transaction_type, :stock_name,:price, :number_of_stock, :total_price, :status)
     end
 
