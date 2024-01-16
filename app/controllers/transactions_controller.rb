@@ -15,10 +15,10 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new/[stocks symbol]
   def new
-
+    @user = User.find(session[:user_id])
     @transaction = Transaction.new
     @stock = Stock.new
-    @user = User.find(session[:user_id])
+    
     @company = @companies.find {|hash| hash[:symbol]==params[:symbol]}
   end
 
