@@ -6,7 +6,12 @@
       <td> <%= user.role %></td>
       <td><%= user.status %></td>
       <% if action_name != 'show' %>
-      <td><%= link_to "Show this user", user %></td>
+      <td>
+      <% if user.status == 'Approved' %>
+        <%= link_to "Show this user", user %></td>
+      <% else %>
+          <%= button_to "Approve this user", user, method: 'POST' %></td>
+      <% end %>
       <% end %>
     </tr>
 

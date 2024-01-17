@@ -46,11 +46,6 @@
 
 
     </div>
-
-    <div>
-      <%= form.label :status, style: "display: block" %>
-      <%= form.select :status, options_for_select(['Pending', 'Approved']), prompt: 'Select a status' %>
-    </div>
   <% end %>
     <div>
       <%= form.submit action_name == 'new'?'Register':'Save Changes', :class => 'btn btn-primary btn-block m-2' %>

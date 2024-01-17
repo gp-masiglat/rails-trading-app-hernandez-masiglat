@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/cash_account/new', to: 'cash_accounts#new'
   post '/cash_account/create', to: 'cash_accounts#create'
   get '/stocks/:symbol', to: 'stocks#show', as: 'show_stocks_path'
+  post '/users/:id', to: 'users#approve_user'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
