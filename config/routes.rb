@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   get '/stocks/:symbol', to: 'stocks#show', as: 'show_stocks_path'
   post '/transactions/buy', to: 'transactions#buy', as: 'transaction_buy'
   post '/transactions/sell', to: 'transactions#sell', as: 'transaction_sell'
-  get '/transactions/new/:symbol', to: 'transactions#new', as: 'transaction_new_path'
+  get '/transactions/new/:symbol', to: 'transactions#new', as: 'transaction_new_path'  
+  post '/users/:id', to: 'users#approve_user'
   
 application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
