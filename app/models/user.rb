@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-    validates :username, presence: true, uniqueness: { scope: :email_address }
+    validates :username, presence: true, uniqueness: { scope: :username }
+    validates :email_address, presence: true, uniqueness: { scope: :email_address }
     has_secure_password
     has_many :cash_accounts
     has_many :stocks
@@ -15,7 +16,7 @@ class User < ApplicationRecord
         end
 
         def set_role_value
-            self.role = 'Trader' if status.blank?
+            self.role = 'Trader' if role.blank?
         end
 
 end
