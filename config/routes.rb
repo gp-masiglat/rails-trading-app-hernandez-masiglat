@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :stocks, except: [:show]
-  resources :transactions
+  # namespace :users , except: [:new] do 
+    resources :stocks, except: [:show]
+    resources :transactions, only: [:index]
   resources :users, except: [:new]
+  # end
+
 
   
   get '/signup', to: 'users#new'
@@ -13,7 +16,10 @@ Rails.application.routes.draw do
   get '/cash_account/new', to: 'cash_accounts#new'
   post '/cash_account/create', to: 'cash_accounts#create'
   get '/stocks/:symbol', to: 'stocks#show', as: 'show_stocks_path'
-  post '/users/:id', to: 'users#approve_user'
+  post '/transactions/buy', to: 'transactions#buy', as: 'transaction_buy'
+  post '/transactions/sell', to: 'transactions#sell', as: 'transaction_sell'
+  get '/transactions/new/:symbol', to: 'transactions#new', as: 'transaction_new_path'
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
