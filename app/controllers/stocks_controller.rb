@@ -84,7 +84,8 @@ class StocksController < ApplicationController
 
     # set companies to be shown in index page
     def set_companies
-      limited_companies = ['AMZN', 'AAPL', 'MSFT', 'TSLA', 'BAC']
+      # limited_companies = ['AMZN', 'AAPL', 'MSFT', 'TSLA', 'BAC']
+      limited_companies = ['AMZN', 'AAPL']
       @companies = []
       # @companies = @client.ref_data_symbols
       limited_companies.each do |symbol|

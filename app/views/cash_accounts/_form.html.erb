@@ -5,10 +5,9 @@
   <div class="col-lg-5">
   
     <%= form_with(model: cash_account, url: cash_account_create_path) do |form| %>
-        
-        <%# select_tag :trans_type, options_for_select([["Deposit","Deposit"],["Widthdraw","Widthdraw"]]), :class => 'form-control', :required => true,
-        include_blank: 'Select Transaction' %>
-        <%= form.select(:trans_type, [['Select Transaction',''],['Deposit','Deposit'],['Widthdraw','Widthdraw']],{:class => 'form-control',:required => true, :id => 'trans_type'}) %>
+
+        <%# form.select(:trans_type, [['Select Transaction',''],['Deposit','Deposit'],['Widthdraw','Widthdraw']],{:class => 'form-control',:required => true, :id => 'trans_type'}) %>
+        <%= form.select(:trans_type, %w{ Deposit Widthdraw }, {:include_blank => 'Select transaction',:required => true},{:class => 'form-control text-center'} ) %>
 
         <%= form.hidden_field :status, :value => 'ok' %>    
         <div class="form-group">

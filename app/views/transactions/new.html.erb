@@ -1,9 +1,149 @@
-<h1>New transaction</h1>
 
-<%= render "form", transaction: @transaction %>
 
-<br>
-
-<div>
+<div class="mt-3">
   <%= link_to "Back to transactions", transactions_path %>
 </div>
+<%
+  if params[:trans_type] == 'Buy'
+    url = "/transactions/buy"
+  else
+    url = "/transactions/sell"
+  end
+
+%>
+
+<div class="container-fluid d-flex justify-content-center">
+
+  <%= form_with url: url, method: :post  do |form| %>
+    <h1 class="text-center"><%= params[:trans_type] %></h1>
+
+      <div class="mb-1" id="cash_h4">
+        <label>Wallet Balance</label><br>
+        <h4 > <%= @user[:balance]  %></h4>
+        <%= form.hidden_field :balance, value: @user[:balance] , id: "user_bal" %>
+        
+      </div>
+      
+      <div>
+        <%# form.label :user_id, style: "display: block" %>
+        <%= form.hidden_field :user_id , value: @user[:id] %>
+      </div>
+
+      <div>
+        <%# form.label :transaction_type, style: "display: block" %>
+        <%= form.hidden_field :transaction_type, value: params[:trans_type] , id: "trans_type"   %>
+        <%= form.hidden_field :qty, value: params[:qty] , id: "qty" %>
+      </div>
+
+      <div>
+        <label for="stock_name" > Company : <h5><%= @company[:symbol] %></h5></label> <br>
+        <%= form.hidden_field :stock_name ,value: @company[:symbol]  %>
+        <%= form.hidden_field :symbol ,value: @company[:symbol]  %>
+      </div>
+
+      <div>
+        <label for="current_price" > Price : <h5><%= @company[:price]  %></h5></label> <br>
+        <%= form.hidden_field :price, value:@company[:price] , id: "stock_price" %>
+      </div>
+
+      <div id="avail_stocks">
+        <label for="avail_stocks" > Available Stocks : <h5><%= params[:qty]  %></h5></label> <br>
+      </div>
+
+      <div>
+        <%= form.label :number_of_stock, style: "display: block" %>
+        <%= form.number_field :number_of_stock, id: "stock_qty", :onkeyup => "qty_function(this.value)" , :required => true %>
+        <%= form.hidden_field :quantity %>
+      </div>
+
+      <div>
+        <%= form.label :total_price, style: "display: block" %>
+        <%= form.text_field :total_price , id: "total_price", :disabled => true %>
+      </div>
+
+      <div>
+        <%# form.label :status, style: "display: block" %>
+        <%= form.hidden_field :status ,value: 'ok' %>
+      </div>
+
+      <div class="mt-1">
+        <%= form.submit :id=>"submit",:class=>"btn btn-primary mt-1" %>
+      </div>
+
+ 
+  <% end %>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script> 
+
+
+  var stock_qty = document.getElementById("stock_qty");
+  var total_price = document.getElementById("total_price");
+  var stock_price = document.getElementById("stock_price");
+  var trans_type = document.getElementById("trans_type");
+  
+  var submit = document.getElementById("submit");
+  var user_bal = document.getElementById("user_bal").value;
+  var qty = document.getElementById("qty").value;
+  var cash_h4 = document.getElementById("cash_h4");
+  var avail_stocks =document.getElementById("avail_stocks");
+
+
+  if(trans_type.value == "Sell"){
+    cash_h4.style.display = 'none';
+    if(stock_qty.value == '' ){
+      submit.disabled = true;
+    }else{
+      submit.disabled = false;
+    }
+  }
+  if(trans_type.value == "Buy"){
+    avail_stocks.style.display = 'none';
+    if(user_bal <= 0 || stock_qty.value == ''|| total_price.value > parseFloat(user_bal)){
+      submit.disabled = true;
+    }else{
+      submit.disabled = false;
+    }
+  }
+  function qty_function(e){
+      var val = e.keyCode;
+
+      console.log(parseFloat(e)*parseFloat(stock_price.value));
+      total_price.value = parseFloat(e)*parseFloat(stock_price.value);
+      if(trans_type.value === "Sell"){
+        cash_h4.style.display = 'none';
+        if(stock_qty.value == ''  || parseFloat(e) > qty || parseFloat(e) <=0){
+          submit.disabled = true;
+        }else{
+          submit.disabled = false;
+        }
+      }
+
+        if(trans_type.value === "Buy"){
+          
+          if(user_bal <= 0 || stock_qty.value == '' ||total_price.value > parseFloat(user_bal)){
+            submit.disabled = true;
+          }else{
+            submit.disabled = false;
+          }
+  
+        }
+
+    }
+
+
+  </script>
+
