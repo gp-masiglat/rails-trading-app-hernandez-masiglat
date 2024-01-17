@@ -73,3 +73,4 @@ end
 gem 'pg'
 
 gem 'iex-ruby-client'
+gem "letter_opener", group: :development

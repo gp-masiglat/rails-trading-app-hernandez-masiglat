@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy approve_user ]
   # before_action :check_privilege, only
 
   # GET /users or /users.json
   def index
     redirect_to root_path if current_user.role != 'Admin'
     @users = User.all
+    @pending_users = User.where(status: 'Pending')
   end
 
   # GET /users/1 or /users/1.json
@@ -28,6 +29,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        UserMailer.welcome_email(user_params).deliver_now
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -57,6 +59,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def approve_user
+    if @user.update(status: 'Approved')
+      UserMailer.approved_email(@user).deliver_now
+      redirect_to users_path, notice:"User successfully approved!"
     end
   end
 
