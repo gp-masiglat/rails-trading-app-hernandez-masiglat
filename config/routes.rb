@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   post '/users/:id', to: 'users#approve_user'
   
 application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get '/transactions/new/:symbol', to: 'transactions#new', as: 'transaction_new_path'
+  
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
