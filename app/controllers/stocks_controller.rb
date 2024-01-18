@@ -1,9 +1,12 @@
 class StocksController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  before_action :authorize_user!, except: [:index]
   before_action :set_stock, only: %i[ edit update destroy ]
   before_action :set_companies, only: %i[ index show ]
 
   # GET /stocks or /stocks.json
   def index
+    redirect_to users_path if current_user.role == 'Admin'
     if current_user
       @user = User.find(current_user.id)
       @stocks = @user.stocks

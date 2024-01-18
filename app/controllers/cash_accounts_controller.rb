@@ -1,5 +1,6 @@
 class CashAccountsController < ApplicationController
-    # before_action :authenticate_user!, except: [:new, :create]
+    before_action :authenticate_user!
+    before_action :authorize_user!
     before_action :set_user
 
   def index

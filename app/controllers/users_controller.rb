@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
+  before_action :authorize_user!, except: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_user, only: %i[ show edit update destroy approve_user ]
   # before_action :check_privilege, only
 
@@ -41,6 +42,13 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    
+    if user_params[:user][:password].blank?
+      # If the password is blank, remove it from the parameters
+      user_params[:user].delete(:password)
+      user_params[:user].delete(:password_confirmation)
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
@@ -66,6 +74,8 @@ class UsersController < ApplicationController
     if @user.update(status: 'Approved')
       UserMailer.approved_email(@user).deliver_now
       redirect_to users_path, notice:"User successfully approved!"
+    else 
+      redirect_to users_path, notice:@user.errors
     end
   end
 

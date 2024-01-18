@@ -4,7 +4,13 @@
 
 <br>
 
-<div>
+
+<% if current_user.role == 'Admin' %>
   <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
-</div>
+  <%= link_to "Back to Homepage", users_path %>
+<% else %>
+  <div>
+    <%= link_to "View Profile", @user %> |
+    <%= link_to "Back to Homepage", root_path %>
+  </div>
+<% end %>

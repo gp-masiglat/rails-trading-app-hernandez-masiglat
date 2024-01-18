@@ -1,56 +1,55 @@
 <p style="color: green"><%= notice %></p>
 <div class="m-4">
 
-<h1>Users</h1>
-<div>
-  <%= link_to "New user", signup_path %>
-</div>
+  <h1>Users</h1>
+  <div>
+    <%= link_to "New user", signup_path %>
+  </div>
 
-<div id="users">
-  <table class="table">
-    <thead>
-      <tr>
+  <div id="users">
+    <table class="table">
+      <thead>
+        <tr>
+          
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Fullname address</th>
+          <th scope="col">Role</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <%= render user %>
         
-        <th scope="col">Username</th>
-        <th scope="col">Email</th>
-        <th scope="col">Fullname address</th>
-        <th scope="col">Role</th>
-        <th scope="col">Status</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <%= render user %>
-      
-      <% end %>
-    </tbody>
-  </table>
-</div>
-</div>
-<h1>Pending Users</h1>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <h1>Pending Users</h1>
 
-<div id="pending_users">
-  <table class="table">
-    <thead>
-      <tr>
+  <div id="pending_users">
+    <table class="table">
+      <thead>
+        <tr>
+          
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Fullname address</th>
+          <th scope="col">Role</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pending_users.each do |user| %>
+          <%= render user %>
         
-        <th scope="col">Username</th>
-        <th scope="col">Email</th>
-        <th scope="col">Fullname address</th>
-        <th scope="col">Role</th>
-        <th scope="col">Status</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @pending_users.each do |user| %>
-        <%= render user %>
-      
-      <% end %>
-    </tbody>
-  </table>
-</div>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 

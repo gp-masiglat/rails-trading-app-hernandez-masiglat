@@ -1,17 +1,13 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :authorize_user!, except: [:index]
   before_action :set_companies, only: %i[ index new ]
   before_action :set_stock, only: %i[ buy sell ]
   before_action :set_user, only: %i[ buy sell ]
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.where(user_id: session[:user_id])
-    # @transactions = Transaction.all
-  end
-
-  # GET /transactions/1 or /transactions/1.json
-  def show
+    @transactions = current_user.role == 'Trader' ? Transaction.where(user_id: session[:user_id]) : Transaction.all
   end
 
   # GET /transactions/new/[stocks symbol]
@@ -23,15 +19,9 @@ class TransactionsController < ApplicationController
     @company = @companies.find {|hash| hash[:symbol]==params[:symbol]}
   end
 
-  # GET /transactions/1/edit
-  def edit
-
-  end
-
   # POST /transactions or /transactions.json
   def buy
     @stock = Stock.new(stock_params)
-    debugger
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
@@ -88,35 +78,8 @@ class TransactionsController < ApplicationController
 
   end
 
-  # PATCH/PUT /transactions/1 or /transactions/1.json
-  def update
-    respond_to do |format|
-      if @transaction.update(transaction_params)
-        format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
-        format.json { render :show, status: :ok, location: @transaction }
-        
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /transactions/1 or /transactions/1.json
-  def destroy
-    @transaction.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to transactions_url, notice: "Transaction was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
     def set_stock
       @stockExist = Stock.where(user: params[:user_id]).where(symbol: params[:symbol])
