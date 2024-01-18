@@ -17,6 +17,7 @@
       <td><%= company[:name] %></td>
       <td><%= company[:price] %></td>
       <td>
+      <% if current_user %>
         <div class="row">
           <div class="col-lg-2">
             <%= button_to "View", show_stocks_path_url(company[:symbol]), method: :get, :class => 'btn btn-link' %>
@@ -25,6 +26,7 @@
             <%= link_to 'Buy', transaction_new_path_url(company[:symbol],trans_type:'Buy'), method: :get, :class => 'btn btn-link' %>
           </div>
         </div>
+        <% end %>
       </td>
     </tr>
     <% end %>

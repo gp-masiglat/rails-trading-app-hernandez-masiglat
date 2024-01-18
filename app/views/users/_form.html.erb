@@ -1,4 +1,7 @@
+<div class="m-4 row text-center d-flex justify-content-center " >
 
+  <div style="border:1px solid #56261a;border-radius:20px;width:500px;">
+  <h1>Register</h1>
 
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
@@ -13,32 +16,33 @@
     </div>
   <% end %>
 
-  <div class="row text-center d-flex justify-content-center">
+  <div class="row text-center d-flex justify-content-center" >
+    <div>
+      <%= form.label :full_name, style: "display: block" %>
+      <%= form.text_field :full_name , :style=>"border:1px solid #56261a;border-radius:20px;"%>
+    </div>
     <div>
       <%= form.label :username, style: "display: block" %>
-      <%= form.text_field :username %>
+      <%= form.text_field :username , :style=>"border:1px solid #56261a;border-radius:20px;"%>
     </div>
 
     <div>
       <%= form.label :email_address, style: "display: block" %>
-      <%= form.text_field :email_address %>
+      <%= form.text_field :email_address, :style=>"border:1px solid #56261a;border-radius:20px;" %>
     </div>
 
     <% if action_name != 'edit' %>
       <div>
         <%= form.label :password, style: "display: block" %>
-        <%= form.password_field :password %>
+        <%= form.password_field :password, :style=>"border:1px solid #56261a;border-radius:20px;" %>
       </div>
       <div>
         <%= form.label :password_confirmation, style: "display: block" %>
-        <%= form.password_field :password_confirmation %>
+        <%= form.password_field :password_confirmation , :style=>"border:1px solid #56261a;border-radius:20px;"%>
       </div>
     <% end %>
 
-    <div>
-      <%= form.label :full_name, style: "display: block" %>
-      <%= form.text_field :full_name %>
-    </div>
+    
   <% if current_user && current_user.role == 'Admin' %>
     <div>
       <%= form.label :role, style: "display: block" %>
@@ -48,8 +52,12 @@
     </div>
   <% end %>
     <div>
-      <%= form.submit action_name == 'new'?'Register':'Save Changes', :class => 'btn btn-primary btn-block m-2' %>
+      <%= form.submit action_name == 'new'?'Register':'Save Changes', :class => 'btn btn-block m-2' , :style=>"background-color:#56261a;radius:20px;color:#f9eae6;" %>
     </div>
   <% end %>
 
   </div>
+
+  </div>
+
+</div>
