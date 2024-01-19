@@ -4,13 +4,13 @@
   <h1>User Profile</h1>
 
   <div id="pending_users" class='m-4'>
-    <table class="table">
+    <table class="roundedCorners">
       <thead>
         <tr>
           
           <th scope="col">Username</th>
           <th scope="col">Email</th>
-          <th scope="col">Fullname address</th>
+          <th scope="col">Fullname</th>
           <th scope="col">Role</th>
           <th scope="col">Status</th>
         </tr>
@@ -22,10 +22,10 @@
   </div>
 <div>
 <% if current_user.role == 'Admin' %>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+  <%= link_to "Edit this user", edit_user_path(@user) , :class=>'btn m-1' %> |
+  <%= link_to "Back to users", users_path , :class=>'btn m-1' %>
 <% else %>
-  <%= link_to "Edit Profile", edit_user_path(@user) %>
+  <%= link_to "Edit Profile", edit_user_path(@user) , :class=>'btn m-1' %>
 <% end %>
-  <%= button_to "Delete Account", @user, method: :delete %>
+  <%= button_to "Delete Account", @user, method: :delete, :class=>'btn m-1' %>
 </div>

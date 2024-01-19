@@ -1,11 +1,16 @@
-<p style="color: green"><%= notice %></p>
-<p><%= image_tag @company[:logo], alt: 'Image Description', size: '150x150' %></p>
-<p>Company Symbol: <%= @company[:symbol] %></p>
-<p>Company Name: <%= @company[:name] %></p>
-<p>Description: <%= @company[:description] %></p>
-<% if current_user %>
-  <p>Stocks Owned: <%= @stock? @stock.quantity : 0 %></p>
-<% end %>
-<div>
-  <%= link_to "Back to stocks", root_path %>
+<div class="row m-1   d-flex justify-content-center">
+  <div class="col-lg-7">
+
+    <p style="color: green"><%= notice %></p>
+    <p><%= image_tag @company[:logo], alt: 'Image Description', size: '150x150' %></p>
+    <p>Company Symbol: <%= @company[:symbol] %></p>
+    <p>Company Name: <%= @company[:name] %></p>
+    <p>Description: <%= @company[:description] %></p>
+    <% if current_user %>
+      <p>Stocks Owned: <%= @stock? @stock.quantity : 0 %></p>
+    <% end %>
+    <div>
+      <%= link_to "Back to stocks", root_path, :class=>'btn' %>
+    </div>
+  </div>
 </div>
