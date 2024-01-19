@@ -31,7 +31,6 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def buy
     @stock = Stock.new(stock_params)
-    debugger
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
