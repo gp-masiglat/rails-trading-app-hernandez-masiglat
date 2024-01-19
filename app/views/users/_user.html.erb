@@ -1,6 +1,6 @@
 <div id="<%= dom_id user %>">
     <tr>
-      <td scope="row"><%= user.username %></td>
+      <td scope="row"><%= link_to user.username, user %></td>
       <td><%= user.email_address %></td>
       <td><%= user.full_name %></td>
       <td> <%= user.role %></td>
@@ -8,9 +8,9 @@
       <% if action_name != 'show' %>
       <td>
       <% if user.status == 'Approved' %>
-        <%= link_to "Show this user", user %></td>
+        <%= link_to "Edit this user", edit_user_path(user), :class => 'm-3' %></td>
       <% else %>
-          <%= button_to "Approve this user", user, method: 'POST' %></td>
+          <%= button_to "Approve this user", user, method: :post, :class => 'btn btn-link' %></td>
       <% end %>
       <% end %>
     </tr>

@@ -8,18 +8,17 @@ Rails.application.routes.draw do
 
   
   get '/signup', to: 'users#new'
+  post '/users/:id', to: 'users#approve_user'
   delete '/logout', to: 'sessions#destroy'
   get '/login', to: 'sessions#new'
   post '/sessions', to: 'sessions#create'
-  # get '/home', to: 'home#index'
   get '/cash_account', to: 'cash_accounts#index'
   get '/cash_account/new', to: 'cash_accounts#new'
   post '/cash_account/create', to: 'cash_accounts#create'
   get '/stocks/:symbol', to: 'stocks#show', as: 'show_stocks_path'
   post '/transactions/buy', to: 'transactions#buy', as: 'transaction_buy'
   post '/transactions/sell', to: 'transactions#sell', as: 'transaction_sell'
-  get '/transactions/new/:symbol', to: 'transactions#new', as: 'transaction_new_path'  
-  post '/users/:id', to: 'users#approve_user'
+  get '/transactions/new/:symbol', to: 'transactions#new', as: 'transaction_new_path'
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
