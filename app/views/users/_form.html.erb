@@ -1,7 +1,7 @@
 <div class="m-4 row text-center d-flex justify-content-center " >
 
   <div style="border:1px solid #56261a;border-radius:20px;width:500px;">
-  <h1>Register</h1>
+  <h1><%= action_name == 'edit' ? 'Edit User' : 'Register' %></h1>
 
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
@@ -31,7 +31,6 @@
       <%= form.text_field :email_address, :style=>"border:1px solid #56261a;border-radius:20px;" %>
     </div>
 
-    <% if action_name != 'edit' %>
       <div>
         <%= form.label :password, style: "display: block" %>
         <%= form.password_field :password, :style=>"border:1px solid #56261a;border-radius:20px;" %>
@@ -40,7 +39,6 @@
         <%= form.label :password_confirmation, style: "display: block" %>
         <%= form.password_field :password_confirmation , :style=>"border:1px solid #56261a;border-radius:20px;" %>
       </div>
-    <% end %>
 
     
   <% if current_user && current_user.role == 'Admin' %>

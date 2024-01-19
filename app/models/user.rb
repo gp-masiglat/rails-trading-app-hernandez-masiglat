@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-    validates :username, presence: true, uniqueness: { scope: :username }
-    validates :email_address, presence: true, uniqueness: { scope: :email_address }
+    validates :username, :email_address, presence: true
+    validates :username, :email_address, uniqueness: true
+    validates :password, length: { minimum: 6 }, allow_nil: true
     has_secure_password
     has_many :cash_accounts
     has_many :stocks
