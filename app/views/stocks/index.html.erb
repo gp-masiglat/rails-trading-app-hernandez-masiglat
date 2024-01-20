@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 <div class="row m-1   d-flex justify-content-center">
-  <div class="col-lg-5 col-md-11 mr-1" >
+  <div class="<%= current_user ? 'col-lg-5': 'col-lg-12' %> col-md-11 mr-1" >
 
     <h1>Stocks</h1>
     <table class=" roundedCorners" >
@@ -9,7 +9,9 @@
           <th scope="col">Company Symbol</th>
           <th scope="col">Company Name</th>
           <th scope="col">Stock Price</th>
-          <th scope="col">Actions</th>
+          <% if current_user %>
+            <th scope="col">Actions</th>
+          <% end %>
         </tr>
       </thead>
         <tbody>
@@ -35,7 +37,6 @@
         </tbody>
       </table>
 
-    <%= link_to "New stock", new_stock_path %>
   </div>
   <div class="col-lg-7 col-md-11 p-1">
     <% if current_user %>

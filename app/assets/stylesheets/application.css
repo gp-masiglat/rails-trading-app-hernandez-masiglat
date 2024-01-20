@@ -14,26 +14,25 @@
  *= require_self
  */
 
-
-
-table.roundedCorners { 
+table.roundedCorners {
+  width: 100%;
   border: 1px solid #56261a;
-  border-radius: 13px; 
+  border-radius: 13px;
   border-spacing: 0;
   border-collapse: unset;
-  }
-table.roundedCorners td, 
-table.roundedCorners th { 
+}
+table.roundedCorners td,
+table.roundedCorners th {
   border-bottom: 1px solid #56261a;
-  padding: 10px; 
-  }
+  padding: 10px;
+}
 table.roundedCorners tr:last-child > td {
   border-bottom: none;
 }
 
 .btn {
-    background-color:#56261a;
-    border-radius:20px;color:#f9eae6;
-    text-decoration: none;
+  background-color: #56261a;
+  border-radius: 20px;
+  color: #f9eae6;
+  text-decoration: none;
 }
-

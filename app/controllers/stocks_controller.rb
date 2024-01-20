@@ -1,15 +1,16 @@
 class StocksController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :authorize_user!, except: [:index]
+  before_action :authorize_user!, except: [:index, :show]
   before_action :set_stock, only: %i[ edit update destroy ]
   before_action :set_companies, only: %i[ index show ]
 
   # GET /stocks or /stocks.json
   def index
-    redirect_to users_path if current_user.role == 'Admin'
     if current_user
+      redirect_to users_path if current_user.role == 'Admin'
       @user = User.find(current_user.id)
-      @stocks = @user.stocks
+      @stocks = @user.stocks.where('quantity > 0')
+
       @portfolio = []
 
       @stocks.each do |stock|
@@ -87,8 +88,8 @@ class StocksController < ApplicationController
 
     # set companies to be shown in index page
     def set_companies
-      # limited_companies = ['AMZN', 'AAPL', 'MSFT', 'TSLA', 'BAC']
-      limited_companies = ['AMZN', 'AAPL']
+      limited_companies = ['AMZN', 'AAPL', 'MSFT', 'TSLA', 'BAC']
+      # limited_companies = ['AMZN', 'AAPL']
       @companies = []
       # @companies = @client.ref_data_symbols
       limited_companies.each do |symbol|
