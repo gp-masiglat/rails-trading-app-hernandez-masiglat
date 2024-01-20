@@ -65,7 +65,7 @@ class TransactionsController < ApplicationController
         end
         
 
-        format.html { redirect_to transactions_path, notice: "Transaction was successfully created." }
+        format.html { redirect_to transactions_path, notice: "Transaction was successful!" }
         format.json { render :index, status: :created, location: @transactions }
         # format.html { redirect_to stock_url(@stock), notice: "Stocks was successfully created." }
         # format.json { render :create, status: :ok, location: @stock }
